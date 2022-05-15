@@ -1,7 +1,3 @@
-# ID     Name   Age
-# field1\tfield2\tfield3\n
-# field1\tfield2\tfield3\n
-
 from student import student
 from teacher import teacher
 from admin import admin
@@ -19,7 +15,6 @@ def main():
         choice = int(input('Choice: '))
         if choice == 1:
             student()
-            Directing()
         elif choice == 2:
             teacher()
             Directing()
