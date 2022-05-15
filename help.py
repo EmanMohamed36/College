@@ -4,10 +4,15 @@ import os
 import time
 from msvcrt import getch        # for windows users
 
+students_ids = PriorityQueue()
+teachers_ids = PriorityQueue()
+
+existance_student_id = [False for i in range(205)]
+existance_teacher_id = [False for i in range(205)]
+
 def press_any():
     print("Press any key to return back...", end='')
     getch()
-
 
 def Directing():
     print('Redicrecting', end='')
@@ -22,12 +27,6 @@ def Returning():
         print('.', end='')
         time.sleep(0.5)
     os.system("cls");
-
-students_ids = PriorityQueue()
-teachers_ids = PriorityQueue()
-
-existance_student_id = [False for i in range(205)]
-existance_teacher_id = [False for i in range(205)]
 
 def init_student_ids():
     with open("Student.txt", 'r') as student_file:
