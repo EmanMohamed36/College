@@ -1,0 +1,3 @@
+
+def teacher():
+    2

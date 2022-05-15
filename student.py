@@ -1,0 +1,4 @@
+
+def student():
+    1
+
