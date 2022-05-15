@@ -13,6 +13,7 @@ existance_teacher_id = [False for i in range(205)]
 def press_any():
     print("Press any key to return back...", end='')
     getch()
+    print()
 
 def Directing():
     print('Redicrecting', end='')
