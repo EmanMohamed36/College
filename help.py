@@ -16,7 +16,8 @@ existance_student_id = [False for i in range(205)]
 existance_teacher_id = [False for i in range(205)]
 
 def press_any():
-    print("Press any key to return back...", end='')
+    #PJ: Check https://cutt.ly/QHc8Esv
+    print("Press any key to return back...", end = '', flush=True)
     getch()
     print()
 
@@ -25,6 +26,7 @@ def Directing():
     for i in range(3):
         print('.', end='')
         time.sleep(0.5)
+    print()
     os.system("cls")
 
 def Returning():
@@ -32,6 +34,7 @@ def Returning():
     for i in range(3):
         print('.', end='')
         time.sleep(0.5)
+    print()
     os.system("cls")
 
 def init_student_ids():
