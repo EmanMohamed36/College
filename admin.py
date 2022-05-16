@@ -1,4 +1,5 @@
 from help import *
 
 def admin():
-    3
+    Directing()
+
