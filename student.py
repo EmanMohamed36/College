@@ -8,9 +8,10 @@ def write_student():    #Done
         Level = input("Level: ")
         Password = str(getpass("Password: "))
         Id = str(students_ids.get())
+        print("\nRegistration Completed ... Your ID is: ", Id)
+        press_any()
         this_stu = Id + '\t' + Name + '\t' + Age + '\t' + Department + '\t' + Level + '\t' + Password + '\t\n'
         student_file.write(this_stu)
-        print("\nRegistration Completed ... Your ID is: ", Id)
     return this_stu.split('\t')
 
 def read_student():
@@ -47,7 +48,7 @@ def search_student(_id = '-1', _password = '-1'):
 #     os.rename('Temp.txt', 'Student.txt')
 
 def add_new_course(_id = '-1', course_id = 'none'):
-    with open('Student.txt', 'r') as student_file, open('Temp.txt', 'w') as temp_file:
+    with open('Student.txt', 'r') as student_file, open('Temporary.txt', 'w') as temp_file:
         flag = False
         for record in student_file:
             fields = record.split('\t')
@@ -66,7 +67,7 @@ def add_new_course(_id = '-1', course_id = 'none'):
         else:
             print('Student updated successfully')
     os.remove('Student.txt')
-    os.rename('Temp.txt', 'Student.txt')
+    os.rename('Temporary.txt', 'Student.txt')
     return this_student
 
 def update_student(_id = '-1'):
@@ -154,25 +155,50 @@ def student():
             elif stu_choic == '2':
                 # Add new course
                 courses_found = 0
-                with open('Teachers.txt', 'r') as teacher_file:
+                valid_choice = False
+                with open('Teachers.txt', 'r') as teacher_file, open('Temp.txt', 'w') as temp_file:
+                    courses_list = []
                     for record in teacher_file:
                         fields = record.split('\t')
                         if fields[0] not in this_student[6:]:
                             print(fields[0] + '- ' + fields[3])
+                            courses_list.append(fields[0])
                             courses_found += 1
                     if courses_found > 0:
                         course_choice = input('Choose: ')
-                        this_student = add_new_course(this_student[0], course_choice)
+                        if course_choice in courses_list:
+                            valid_choice = True
+                            this_student = add_new_course(this_student[0], course_choice)
+
                     else:
                         print("There is no available courses for you now!")
                         press_any()
+                        
+                if valid_choice:
+                    with open('Teachers.txt', 'r') as teacher_file, open('Temp.txt', 'w') as temp_file:
+                        for record in teacher_file:
+                            fields = record.split('\t')
+                            fields.pop()
+                            if course_choice == fields[0]:
+                                fields.append(this_student[0])
+                                record = ""
+                                for i in range(len(fields)):
+                                    record += fields[i] + '\t'
+                                record += '\n'
+                            temp_file.write(record)
+                    os.remove('Teachers.txt')
+                    os.rename('Temp.txt', 'Teachers.txt')
             elif stu_choic == '3':
                 # show my courses
+                no_courses = True
                 with open('Teachers.txt', 'r') as teacher_file:
                     for record in teacher_file:
                         fields = record.split('\t')
                         if fields[0] in this_student[6:]:
+                            no_courses = False
                             print(fields[0] + '- ' + fields[3])
+                if no_courses:
+                    print('No Courses Found')
                 press_any()
                 
             elif stu_choic == '4':
