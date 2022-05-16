@@ -39,12 +39,12 @@ def Returning():
     os.system("cls")
     print()
 
+
 def init_student_ids():
     with open("Student.txt", 'r') as student_file:
         for record in student_file:
             fields = record.split('\t')
-            #PJ: Edited from int castin to bool Cuz of an error
-            existance_student_id[bool(fields[0])] = 1
+            existance_student_id[int(fields[0])] = 1
         for i in range(1, 205, 1):
             if not existance_student_id[i]:
                 students_ids.put(i)
@@ -53,8 +53,7 @@ def init_teacher_ids():
     with open("Teachers.txt", 'r') as teacher_file:
         for record in teacher_file:
             fields = record.split('\t')
-            #PJ: Edited from int castin to bool Cuz of an error
-            existance_teacher_id[bool(fields[0])] = 1
+            existance_teacher_id[int(fields[0])] = 1
         for i in range(1, 205, 1):
             if not existance_teacher_id[i]:
                 teachers_ids.put(i)
