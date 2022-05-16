@@ -17,10 +17,8 @@ def main():
             student()
         elif choice == 2:
             teacher()
-            Directing()
         elif choice == 3:
             admin()
-            Directing()
         elif choice != 0:
             print('Choose a number between 0 and 3')
             Directing()
