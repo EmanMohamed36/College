@@ -1,7 +1,4 @@
-from dataclasses import field
-from pydoc import doc
 from help import *
-
 
 def SearchTeacher(_id = '-1', _pass = '-1'):
     with open('Teachers.txt', 'r') as InFile:
@@ -85,10 +82,9 @@ def teacher():
             Directing()
 
             if TecCh == '1':
-                print('ID\tName\tAge\tCourse Name\tPassword')
+                print('ID\tName\tAge\tCourse\tPassword')
                 print('-' * 50)
-                print('\t'.join(map(str, thisTeacher[0: 3])) + '\t  ' + thisTeacher[3] + '\t\t    ' +'\t'.join(map(str, thisTeacher[4: 6])), end = '')
-                print()
+                print('\t'.join(map(str, thisTeacher[0: 3])) + '\t  ' + thisTeacher[3] + '\t\t    ' +'\t'.join(map(str, thisTeacher[4: 5])))
                 press_any()
             
             elif TecCh == '2':
