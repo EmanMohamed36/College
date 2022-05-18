@@ -38,9 +38,13 @@ def admin():
                     Returning()
                     return
                 elif Admin_choice == '1':
+                    Directing()
                     ctrl_teacher()
+
                 elif Admin_choice == '2':
+                    Directing()
                     ctrl_student()
+                
                 else:
                     print('Choose a number between 0 and 2')
                     press_any()
@@ -48,3 +52,4 @@ def admin():
         else:
             print('Id or Password is wrond please try again!!!')
             press_any()
+            Returning()
