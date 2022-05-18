@@ -12,15 +12,26 @@ def write_student():    #Done
         press_any()
         this_stu = Id + '\t' + Name + '\t' + Age + '\t' + Department + '\t' + Level + '\t' + Password + '\t\n'
         student_file.write(this_stu)
+        Returning()
+        
     return this_stu.split('\t')
 
 def read_student():
+    flag = 1
     with open('Student.txt', 'r') as student_file:
-        print('ID\tName\tAge\tDepartment\tLevel\tPassword')
-        print('------------------------------------------')
         for record in student_file:
-            print(record, end='')
-        print('\n')
+            if flag:
+                print('ID\tName\tAge\tDepartment\tLevel\tPassword')
+                print('------------------------------------------')
+                flag = 0
+            fields = record.split('\t')
+            for i in range(6):
+                print(fields[i] + '\t', end='')
+            print()
+    if flag:
+        print('No Students Found')
+    press_any()
+    Returning()
 
 def search_student(_id = '-1', _password = '-1'):
     with open('Student.txt', 'r') as student_file:
@@ -68,9 +79,11 @@ def add_new_course(_id = '-1', course_id = 'none'):
             print('Student updated successfully')
     os.remove('Student.txt')
     os.rename('Temporary.txt', 'Student.txt')
+    press_any()
+    Returning()
     return this_student
 
-def update_student(_id = '-1'):
+def update_password(_id = '-1'):
     with open('Student.txt', 'r') as student_file, open('Temp.txt', 'w') as temp_file:
         flag = False
         for record in student_file:
@@ -83,7 +96,7 @@ def update_student(_id = '-1'):
                 for i in range(len(fields)):
                     record += fields[i] + '\t'
                 record += '\n'
-                this_student = record.split('\t')
+                ThisStu = record.split('\t')
             temp_file.write(record)
         if not flag:
             print('Student not found')
@@ -91,7 +104,9 @@ def update_student(_id = '-1'):
             print('Student updated successfully')
     os.remove('Student.txt')
     os.rename('Temp.txt', 'Student.txt')
-    return this_student
+    press_any()
+    Returning()
+    return ThisStu
 
 def student():
     Directing()
@@ -152,11 +167,12 @@ def student():
                     print(this_student[i] + '\t', end='')
                 print()
                 press_any()
+                Returning()
             elif stu_choic == '2':
                 # Add new course
                 courses_found = 0
                 valid_choice = False
-                with open('Teachers.txt', 'r') as teacher_file, open('Temp.txt', 'w') as temp_file:
+                with open('Teachers.txt', 'r') as teacher_file:
                     courses_list = []
                     for record in teacher_file:
                         fields = record.split('\t')
@@ -165,7 +181,10 @@ def student():
                             courses_list.append(fields[0])
                             courses_found += 1
                     if courses_found > 0:
+                        print('0- return back')
                         course_choice = input('Choose: ')
+                        if course_choice == '0':
+                            continue
                         if course_choice in courses_list:
                             valid_choice = True
                             this_student = add_new_course(this_student[0], course_choice)
@@ -173,6 +192,7 @@ def student():
                     else:
                         print("There is no available courses for you now!")
                         press_any()
+                        Returning()
                         
                 if valid_choice:
                     with open('Teachers.txt', 'r') as teacher_file, open('Temp.txt', 'w') as temp_file:
@@ -200,6 +220,7 @@ def student():
                 if no_courses:
                     print('No Courses Found')
                 press_any()
+                Returning()
                 
             elif stu_choic == '4':
-                this_student = update_student(this_student[0])
+                this_student = update_password(this_student[0])
