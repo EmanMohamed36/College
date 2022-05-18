@@ -19,7 +19,6 @@ def update_Teacher(_id = '-1'):
             fields.pop()
             if _id == fields[0]:
                 flag = True    
-                print(fields)
                 fields[4] = getpass("Enter the new password for " + fields[1] + ": ")
                 record = ""
                 for i in range(len(fields)):
